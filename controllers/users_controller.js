@@ -7,14 +7,6 @@ module.exports.profile = function(req, res){
     });
 }
 
-module.exports.posts = function(req, res){
-    return res.render('users_posts', {
-        title: "Codeial",
-        name: "Laksh",
-        color: "Red"
-    });
-}
-
 //render the sign up page
 module.exports.signUp = function(req, res){
     if(req.isAuthenticated()){
