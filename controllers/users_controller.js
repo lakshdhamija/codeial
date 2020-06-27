@@ -12,9 +12,11 @@ module.exports.profile = function(req, res){
 module.exports.update = function(req, res){
     if(req.user.id == req.params.id){
         User.findByIdAndUpdate(req.params.id, {name: req.body.name, email: req.body.email}, function(err, user){  // we can also use req.body instead of this as it is same
+            req.flash('success', 'Details Updated');
             return res.redirect('back');
         });
     }else{
+        req.flash('error', 'Unauthorized!');
         return res.status(401).send('Unauthorized');
     }
 }
@@ -42,22 +44,24 @@ module.exports.signIn = function(req, res){
 //get the sign up data
 module.exports.create = function(req, res){
     if(req.body.password != req.body.confirm_password){
+        req.flash('error', 'Passwords do not match');
         return res.redirect('back');
     }
     User.findOne({ email: req.body.email }, function(err, user){
         if(err){
-            console.log('error in finding user in signing up');
+            req.flash('error', err);
             return;
         }
         if(!user){ // if user doesn't exist, create user
             User.create(req.body, function(err, user){
                 if(err){
-                    console.log('error in creating user while signing up');
+                    req.flash('error', err);
                     return;
                 }
                 return res.redirect('/users/sign-in');
             });
         }else{ // if user exists then redirect to sign up page
+            req.flash('success', 'You have signed up, login to continue!');
             return res.redirect('back');     
         }
     });
