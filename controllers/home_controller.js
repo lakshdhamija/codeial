@@ -4,6 +4,7 @@ module.exports.home = async function(req, res){
     // populate user of each post
     try{
         let posts = await Posts.find({})
+        .sort('-createdAt')
         .populate('user') // populating user in posts to display user name who made post
         .populate({
             path: 'comments', // (name specified according to post.js model) populating comments to display comment
