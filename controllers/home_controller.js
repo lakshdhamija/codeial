@@ -1,5 +1,7 @@
 const Posts = require('../models/post');
 const User = require('../models/user'); // requiring as we need to display list of users on home page
+
+
 module.exports.home = async function(req, res){
     // populate user of each post
     try{
