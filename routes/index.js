@@ -7,5 +7,6 @@ router.get('/', homeController.home);
 router.use('/users', require('./users')); // require users file if incoming request is /users
 router.use('/posts', require('./posts')); // require posts file if incoming request is /posts
 router.use('/comments', require('./comments')); // require controllers file if incoming request is /comments
+router.use('/api', require('./api')); // require index.js in api folder if incoming request is /api
 
 module.exports = router; // exporting to make available to main index.js
