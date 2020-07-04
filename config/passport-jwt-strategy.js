@@ -5,7 +5,7 @@ const User = require('../models/user');
 
 let opts = {
     // header has a list of keys and one is autherization and it also has further keys and one of it is bearer which will have the JWT token
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken,
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'codeial'  // this is decrypt key. Encrypt key in controller/api/v1/users_api.js
 }
 
